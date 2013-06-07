@@ -173,6 +173,14 @@ describe User do
       end
     end
 
+    describe "accessible attributes" do
+      it "should not allow access to admin" do
+        expect do
+          User.new(admin: true)
+        end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
+      end    
+    end
+
     describe "status" do
       let(:unfollowed_post) do
         FactoryGirl.create(:micropost, user: FactoryGirl.create(:user))
